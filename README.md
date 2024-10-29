@@ -1,42 +1,41 @@
 # Simple Hospital Management Server
 
 ## Objective
-This is a Spring Boot application that exposes RESTful APIs for managing patients and doctors in a hospital setting. It allows for the addition, retrieval, assignment, and deletion of doctors and patients.
+A Spring Boot application exposing RESTful APIs to manage patients and doctors in a hospital setting.
 
 ## Models
 
 ### Doctor
-- **id** (Long): Unique identifier for the doctor.
-- **name** (String): Name of the doctor.
-- **maxPatients** (int): Maximum number of patients the doctor can handle.
-- **currentPatients** (int): Current number of patients assigned to the doctor.
-- **experience** (double): Years of experience the doctor has.
+- **id** (Long)
+- **name** (String)
+- **maxPatients** (int)
+- **currentPatients** (int)
+- **experience** (double)
 
 ### Patient
-- **id** (Long): Unique identifier for the patient.
-- **name** (String): Name of the patient.
-- **illnessExperienceRequirement** (double): Minimum experience required from a doctor to treat this patient.
-- **isCured** (Boolean): Indicates if the patient has been cured (initially set to false).
-- **doctors** (ArrayList<Long>): List of doctor IDs assigned to the patient.
+- **id** (Long)
+- **name** (String)
+- **illnessExperienceRequirement** (double)
+- **isCured** (Boolean, initially false)
+- **doctors** (ArrayList<Long>)
 
 ## API Endpoints
 
 ### Doctor Endpoints
-- **GET** `/doctors/{doctorId}`: Retrieve information for a specific doctor.
-- **GET** `/doctors`: Retrieve information for all doctors.
+- **GET** `/doctors/{doctorId}`: Get a specific doctor.
+- **GET** `/doctors`: Get all doctors.
 - **POST** `/doctors`: Add a new doctor.
-- **DELETE** `/doctors/{doctorId}`: Delete a specific doctor.
+- **DELETE** `/doctors/{doctorId}`: Delete a doctor.
 
 ### Patient Endpoints
-- **GET** `/patients/{patientId}`: Retrieve information for a specific patient.
-- **GET** `/patients`: Retrieve information for all patients.
+- **GET** `/patients/{patientId}`: Get a specific patient.
+- **GET** `/patients`: Get all patients.
 - **POST** `/patients`: Add a new patient.
-- **DELETE** `/patients/{patientId}`: Delete a specific patient.
+- **DELETE** `/patients/{patientId}`: Delete a patient.
 
-### Assignment Endpoint
-- **POST** `/assign/{doctorId}`: Assign a doctor to a patient if the doctor's experience meets or exceeds the patient's illness experience requirement and the doctor is not fully booked.  
-  *Request Body:*
-  ```json
-  {
-    "patientId": Long
-  }
+### Assignment & Release
+- **POST** `/assign/{doctorId}`: Assign a doctor to a patient.
+- **PUT** `/release/{patientId}`: Mark a patient as cured.
+
+### Welcome Message
+- **GET** `/`: Return a welcome message.
